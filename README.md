@@ -9,7 +9,7 @@ NodeJS command-line application which accepts a list of countries as a command-l
 
 Example:
 ```
-~/ncr-test-master$ node population Greece Brazil France Germany```
+~/ncr-test-master$ node population Greece Brazil France Germany
 Brazil: 211803502
 Germany: 80611271
 France: 65029330
