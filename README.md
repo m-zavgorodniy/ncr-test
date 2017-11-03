@@ -5,7 +5,11 @@ NodeJS command-line application which accepts a list of countries as a command-l
 
 ### Usage
 
-```population [options] [<country [<country> ...]>]```
+```
+population [options] [<country [<country> ...]>]
+  Options:
+    -l, --list     output the list of all countries
+```
 
 Example:
 ```
