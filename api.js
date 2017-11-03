@@ -25,10 +25,12 @@ const listAll = async () => {
 }
 
 const getPopulations = (countries) => {
+  // get UTC date in YYYY-MM-DD
+  const today = new Date().toISOString().substring(0, 10);
+  // pile up parallel requests to the API
+  const populations = countries.map((country) => _requestPopulation(country, today));
   // trying to be nice adding a clue to the error message
   const errorClue = `Enclose the country name in quotes if it consists of more than one word like "United Kingdom". Use the -l option to get the list of available country names`;
-  // pile up parallel requests to the API
-  const populations = countries.map((country) => _requestPopulation(country));
   // wait for all the requests to complete then print the results out
   Promise.all(populations)
     .then((populations) => {
@@ -52,9 +54,8 @@ const getPopulations = (countries) => {
 }
 
 // for a given country, requests its population from API
-const _requestPopulation = (country) => {
-  const today = new Date().toISOString().substring(0, 10); // UTC date in YYYY-MM-DD
-  const apiRef = `${config.API_ENTRY_URL}/population/${country}/${today}/`;
+const _requestPopulation = (country, date) => {
+  const apiRef = `${config.API_ENTRY_URL}/population/${country}/${date}/`;
 
   return new Promise((resolve, reject) => {
     let hasError;
